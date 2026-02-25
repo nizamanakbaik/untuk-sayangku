@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sayang!</title>
+    <style>
+        :root {
+            --pink-dark: #ff85a2;
+            --pink-light: #ffb3c1;
+            --pink-soft: #ffe5ec;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--pink-soft);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Efek Hujan Hati */
+        .heart {
+            position: fixed;
+            top: -10px;
+            color: #ff4d6d;
+            font-size: 20px;
+            user-select: none;
+            z-index: 1000;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(360deg); }
+        }
+
+        /* Tampilan 1: Password */
+        #login-page {
+            text-align: center;
+            z-index: 10;
+        }
+
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid var(--pink-dark);
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid var(--pink-light);
+            text-align: center;
+            outline: none;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: var(--pink-dark);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { background-color: #ff4d6d; }
+
+        /* Tampilan 2: Konten Utama */
+        #main-content {
+            display: none;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            height: 80vh;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 10;
+            overflow-y: auto; /* Agar bisa scroll */
+        }
+
+        .box-gift {
+            font-size: 80px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .box-gift:hover { transform: scale(1.1); }
+
+        #surprise {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .cake { font-size: 60px; }
+
+        .ucapan {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+            margin: 20px 0;
+            text-align: justify;
+        }
+
+        .photos img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 5px solid var(--pink-soft);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: var(--pink-light); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="lagu.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="login-page">
+        <div class="login-box">
+            <h2 style="color: var(--pink-dark);">Masukin Kuncinya!</h2>
+            <input type="password" id="passInput" placeholder="ayo jawab😼"><br>
+            <button onclick="checkPassword()">Masuk</button>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div id="gift-section">
+            <p style="color: var(--pink-dark);">Klik Kotaknya Sayang!</p>
+            <div class="box-gift" onclick="openGift()">🎁</div>
+        </div>
+
+        <div id="surprise">
+            <div class="cake">🎂✨</div>
+            <h2 style="color: var(--pink-dark);">HAPPY BIRTHDAY!</h2>
+            
+            <div class="ucapan">
+                "HAYY SAYANGG SELAMAT ULANG TAHUNN YAA CIEE UDAH 16 TAHUN AJAAA, GA NYANGKA YAAA, CEPETT BANGET, kamuu tuu wanitaa hebat, wanita kuatt yangg di didik keras dari kecil, mulai dari di bandingin di tinggalin dan lain-lain, MUNGKIN YAA KALOO WANITA LAINN AJAA PALING UDAA NYERAH SAYANGG UDAA GAA KUATT, dann sekalii lagii selamat ulang tahunn sayangg bidadarii akuuu sayang ku cinta kuu, yang palinggg cantik imut dannn menggemaskan😼😼😼, I love youuu HIHIHII"
+            </div>
+
+            <div class="photos">
+                <img src="foto1.jpg" alt="Foto Cantik 1">
+                <img src="foto2.jpg" alt="Foto Cantik 2">
+                <img src="foto3.jpg" alt="Foto Cantik 3">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Efek Hujan Hati
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 300);
+
+        // Cek Password
+        function checkPassword() {
+            const pass = document.getElementById('passInput').value;
+            if (pass === "230211") {
+                document.getElementById('login-page').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('bgMusic').play().catch(e => console.log("Autoplay dicegah browser, musik akan main setelah interaksi klik kado."));
+            } else {
+                alert("Salah sayangg! Coba inget-inget lagi 😼");
+            }
+        }
+
+        // Buka Kado
+        function openGift() {
+            document.getElementById('gift-section').style.display = 'none';
+            document.getElementById('surprise').style.display = 'block';
+            document.getElementById('bgMusic').play(); // Play music here too for safety
+        }
+    </script>
+</body>
+</html>
+        
